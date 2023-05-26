@@ -1,0 +1,66 @@
+<sdf version='1.7'>
+  <world name='default'>
+    <light type="directional" name="sun">
+        <cast_shadows>true</cast_shadows>
+        <pose>0 0 10 0.9 0 0</pose>
+        <diffuse>0.8 0.8 0.8 1</diffuse>
+        <specular>0.2 0.2 0.2 1</specular>
+        <attenuation>
+            <range>1000</range>
+            <constant>0.9</constant>
+            <linear>0.01</linear>
+            <quadratic>0.001</quadratic>
+        </attenuation>
+        <direction>-0.3 0.3 -0.9</direction>
+        </light>
+
+        <!--        -->
+        <!-- Models -->
+        <!--        -->
+
+        <!-- Ground -->
+        <model name="lunar_ground_plane">
+        <static>true</static>
+        <pose>-7 2 0 0 0 0</pose>
+        <link name='lunar_ground_plane'>
+            <collision name="lunar_ground_plane_collision">
+                <pose>0 0 0 0 0 0</pose>
+                <geometry>
+                <mesh>
+                    <scale>1 1 1</scale>
+                    <uri>../models/lunar_proto_landscape_v002_flattened.dae</uri>
+                </mesh>
+                </geometry>
+            </collision>
+            <visual name='lunar_ground_plane_visual'>
+                <pose>0 0 0 0 0 0</pose>
+                <geometry>
+                <mesh>
+                    <scale>1 1 1</scale>
+                    <uri>../models/lunar_proto_landscape_v002_flattened.dae</uri>
+                </mesh>
+                </geometry>
+            </visual>
+        </link>
+        </model>
+
+
+        <!-- Sky -->
+        <model name="black_sky">
+        <static>true</static>
+        <pose>0 0 -12.0 0 0 0</pose>
+        <link name='black_sky_link'>
+            <visual name='black_sky_visual'>
+                <pose>0 0 0 0 0 0</pose>
+                <geometry>
+                <mesh>
+                    <scale>1 1 1</scale>
+                    <uri>../models/black_sky.dae</uri>
+                </mesh>
+                </geometry>
+            </visual>
+        </link>
+        </model>
+
+    </world>
+</sdf>
