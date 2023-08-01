@@ -45,9 +45,6 @@ def launch_setup(context, *args, **kwargs):
     urdf = os.path.join(pkg_turtlebot_description, 'urdf/', 'turtlebot3_waffle.urdf')
     
     number_of_robots = LaunchConfiguration('number_of_robots').perform(context)
-
-
-    pkg_box_bot_description = get_package_share_directory('box_bot_description')
     
     #assert os.path.exists(urdf), "Thebox_bot.urdf doesnt exist in "+str(urdf)
     
@@ -130,6 +127,7 @@ def launch_setup(context, *args, **kwargs):
             PythonLaunchDescriptionSource([ThisLaunchFileDir(), '/slam_toolbox.launch.py']),
             launch_arguments={'use_sim_time': 'true'}.items(),
         ),)
+
 
 
     # Create the launch description and populate

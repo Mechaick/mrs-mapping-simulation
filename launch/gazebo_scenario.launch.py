@@ -13,7 +13,6 @@ from launch.substitutions import LaunchConfiguration, FindExecutable
 from launch_ros.actions import Node
 
 def generate_launch_description():
-    pkg_box_bot_description = get_package_share_directory('box_bot_description')
     pkg_gazebo_ros = get_package_share_directory('gazebo_ros')
     pkg_mrs_mapping_simulation = get_package_share_directory('mrs_mapping_simulation')
 
