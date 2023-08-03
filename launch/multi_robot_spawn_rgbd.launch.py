@@ -127,6 +127,11 @@ def launch_setup(context, *args, **kwargs):
             PythonLaunchDescriptionSource([ThisLaunchFileDir(), '/slam_toolbox.launch.py']),
             launch_arguments={'use_sim_time': 'true'}.items(),
         ),)
+        # spawn_robots_cmds.append(
+        #     IncludeLaunchDescription(
+        #     PythonLaunchDescriptionSource([ThisLaunchFileDir(), '/navigation.launch.py']),
+        #     launch_arguments={'use_sim_time': 'true'}.items(),
+        # ),)
 
 
 
