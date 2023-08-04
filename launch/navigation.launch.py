@@ -55,12 +55,12 @@ def generate_launch_description():
     full_path = os.path.join(pkg_mrs_mapping_simulation, 'config/', 'nav2_'+robot_name+'.yaml')
     check_file = os.path.isfile(full_path)
     print("Checking if file exists: "+str(check_file)+" "+full_path)
-    #if(check_file == False):
-    print("Creating new config file for robot "+robot_name)
-    os.system("cp "+pkg_mrs_mapping_simulation+"/config/nav2_tb3_0.yaml "+full_path)
-    os.system("sed -i 's/tb3_0/"+robot_name+"/g' "+full_path)
+    if(check_file == False):
+        print("Creating new config file for robot "+robot_name)
+        os.system("cp "+pkg_mrs_mapping_simulation+"/config/nav2_tb3_0.yaml "+full_path)
+        os.system("sed -i 's/tb3_0/"+robot_name+"/g' "+full_path)
 
-    increase_ports(full_path)
+        increase_ports(full_path)
 
     default_params_file = os.path.join(get_package_share_directory("mrs_mapping_simulation"),
                                         'config', 'nav2_'+robot_name+'.yaml')
