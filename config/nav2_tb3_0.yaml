@@ -224,7 +224,7 @@ global_costmap:
       static_layer:
         plugin: "nav2_costmap_2d::StaticLayer"
         map_subscribe_transient_local: True
-        map_topic: "/tb3_0/map"
+        map_topic: "/tb3_0/map/map_expanded"
 
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"

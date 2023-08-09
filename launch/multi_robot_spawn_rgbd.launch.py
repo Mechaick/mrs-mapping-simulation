@@ -70,6 +70,12 @@ def launch_setup(context, *args, **kwargs):
             )
         )
         spawn_robots_cmds.append(
+            SetEnvironmentVariable(
+                name="MAP_TOPIC",
+                value="map"
+            )
+        )
+        spawn_robots_cmds.append(
             
             Node(
                 package='robot_state_publisher',
@@ -122,6 +128,16 @@ def launch_setup(context, *args, **kwargs):
                 arguments=['robot_name', robot['name']],
             )
          )
+        spawn_robots_cmds.append(
+            Node(
+                package='map_expand',
+                executable='expander',
+                name='expander' + robot['name'],
+                output='screen',
+                node_namespace=robot['name'],
+            )
+         )
+
         spawn_robots_cmds.append(
             IncludeLaunchDescription(
             PythonLaunchDescriptionSource([ThisLaunchFileDir(), '/slam_toolbox.launch.py']),
