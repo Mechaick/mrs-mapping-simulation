@@ -238,9 +238,9 @@ def generate_gazebo_world(num_boxes, x_min, x_max, y_min, y_max):
     return world_template
 
 if __name__ == '__main__':
-    X = 1000  # Number of boxes you want to spawn
-    x_min, x_max = -70, 70  # Define your X boundary for random positions
-    y_min, y_max = -70, 70  # Define your Y boundary for random positions
+    X = 200  # Number of boxes you want to spawn
+    x_min, x_max = -30, 30  # Define your X boundary for random positions
+    y_min, y_max = -30, 30  # Define your Y boundary for random positions
 
     sdf_content = generate_gazebo_world(X, x_min, x_max, y_min, y_max)
     

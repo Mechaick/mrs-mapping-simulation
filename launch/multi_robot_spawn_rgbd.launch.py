@@ -15,7 +15,8 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import ThisLaunchFileDir, LaunchConfiguration
 import os.path
 
-spawn_points = [[35.0, -3.0, 0.0], [28.0, -11.0, 0.0], [-25.0, 17.0, 0.0],[-27.0, 37.0, 0.0],[0.0, 0.0, 0.0],[-25.0, -6.0, 0.0],[-16.0, 33.0, 0.0],[1.0, -41.0, 0.0],[14.0, -30.0, 0.0],[34.0, -29.0, 0.0],[62.0, -23.0, 0.0],[74.0, -3.0, 0.0]]
+#spawn_points = [[35.0, -3.0, 0.0], [28.0, -11.0, 0.0], [-25.0, 17.0, 0.0],[-27.0, 37.0, 0.0],[0.0, 0.0, 0.0],[-25.0, -6.0, 0.0],[-16.0, 33.0, 0.0],[1.0, -41.0, 0.0],[14.0, -30.0, 0.0],[34.0, -29.0, 0.0],[62.0, -23.0, 0.0],[74.0, -3.0, 0.0]]
+spawn_points = [[-7.0, 0.0, 0.0], [7.0, 6.0, 0.0],[7.0, -6.0, 0.0], [15.0, -10.0, 0.0], [-15.0, 15.0, 0.0]]
 
 def gen_robot_list(number_of_robots):
 
@@ -33,8 +34,9 @@ def gen_robot_list(number_of_robots):
         print("Creating new urdf file for robot "+robot_name)
         os.system("cp "+pkg_mrs_mapping_simulation+"/robot/turtlebot3_waffleX.sdf "+full_path)
         os.system("sed -i 's/tb3_0/"+robot_name+"/g' "+full_path)
-        spawn = spawn_points[random.randint(0,spawn_points.__len__()-1)]
-        spawn_points.remove(spawn)
+        #spawn = spawn_points[random.randint(0,spawn_points.__len__()-1)] 
+        #spawn_points.remove(spawn)
+        spawn = spawn_points[i]
         robots.append({'name': robot_name, 'x_pose': spawn[0], 'y_pose':spawn[1], 'z_pose': spawn[2], 'path':full_path})
 
 
