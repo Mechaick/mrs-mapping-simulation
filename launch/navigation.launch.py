@@ -23,22 +23,41 @@ from launch_ros.actions import Node, PushRosNamespace
 from nav2_common.launch import RewrittenYaml
 from ruamel.yaml import YAML
 import re
+import yaml
+
 
 def increase_ports(filename):
-
-
-    yaml = YAML()
-
     with open(filename, 'r') as yaml_file:
-        data = yaml.load(yaml_file)
+        data = yaml.safe_load(yaml_file)
 
     i = int(re.search(r'\d+', filename).group())
-    print("________________________Robot number: "+str(i))
-    data['bt_navigator']['ros__parameters']['groot_zmq_publisher_port'] += i*2
-    data['bt_navigator']['ros__parameters']['groot_zmq_server_port'] += i*2
+    print("________________________Robot number: " + str(i))
+
+    try:
+        data['bt_navigator']['ros__parameters']['groot_zmq_publisher_port'] += i * 2
+        data['bt_navigator']['ros__parameters']['groot_zmq_server_port'] += i * 2
+    except KeyError:
+        print("Error: Key not found in YAML file.")
 
     with open(filename, 'w') as yaml_file:
-        yaml.dump(data, yaml_file)
+        yaml.safe_dump(data, yaml_file)
+
+
+def create_new_config(pkg_mrs_mapping_simulation, robot_name):
+    original_file_path = os.path.join(pkg_mrs_mapping_simulation, 'config', 'nav2_tb3_0.yaml')
+    new_file_path = os.path.join(pkg_mrs_mapping_simulation, 'config', f'nav2_{robot_name}.yaml')
+
+    # Read the original file as text
+    with open(original_file_path, 'r') as f:
+        file_content = f.read()
+
+    # Replace all occurrences of 'tb3_0' with the new robot_name
+    modified_content = file_content.replace('tb3_0', robot_name)
+
+    # Write the modified content to a new file
+    with open(new_file_path, 'w') as f:
+        f.write(modified_content)
+
 
 def generate_launch_description():
     # Get the launch directory
@@ -57,8 +76,7 @@ def generate_launch_description():
     print("Checking if file exists: "+str(check_file)+" "+full_path)
     if(check_file == False):
         print("Creating new config file for robot "+robot_name)
-        os.system("cp "+pkg_mrs_mapping_simulation+"/config/nav2_tb3_0.yaml "+full_path)
-        os.system("sed -i 's/tb3_0/"+robot_name+"/g' "+full_path)
+        create_new_config(pkg_mrs_mapping_simulation, robot_name)
 
         increase_ports(full_path)
 
